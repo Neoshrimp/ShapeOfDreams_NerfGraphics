@@ -1,0 +1,103 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	<PublicizerClearCacheOnClean>true</PublicizerClearCacheOnClean>
+    <PublicizerLogFilePath>.\Krafs.publicizer.log</PublicizerLogFilePath>
+	<PublicizerRuntimeStrategies>IgnoresAccessChecksTo</PublicizerRuntimeStrategies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BepInEx.Analyzers" Version="1.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="BepInEx.Core" Version="5.4.21" />
+    <PackageReference Include="HarmonyX" Version="2.9.0" />
+    <PackageReference Include="Krafs.Publicizer" Version="2.2.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+	
+  <ItemGroup>
+      <Publicize Include="Dew.Contents;Dew.Core;Dew.External;Dew.UI" IncludeCompilerGeneratedMembers="false" IncludeVirtualMembers="false" />
+  </ItemGroup>
+	
+  <PropertyGroup>
+	  <GameFolder>..\..\..\games\Shape.of.Dreams.v1.0.6.2</GameFolder>
+	  <BepInExFolder>$(GameFolder)\BepInEx</BepInExFolder>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <Reference Include="Dew.Contents">
+      <HintPath>$(GameFolder)\Shape of Dreams_Data\Managed\Dew.Contents.dll</HintPath>
+    </Reference>
+    <Reference Include="Dew.Core">
+      <HintPath>$(GameFolder)\Shape of Dreams_Data\Managed\Dew.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Dew.External">
+      <HintPath>$(GameFolder)\Shape of Dreams_Data\Managed\Dew.External.dll</HintPath>
+    </Reference>
+    <Reference Include="Dew.UI">
+      <HintPath>$(GameFolder)\Shape of Dreams_Data\Managed\Dew.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="inc8877.GraphicsConfigurator">
+      <HintPath>$(GameFolder)\Shape of Dreams_Data\Managed\inc8877.GraphicsConfigurator.dll</HintPath>
+    </Reference>
+	<Reference Include="Unity.Addressables">
+      <HintPath>$(GameFolder)\Shape of Dreams_Data\Managed\Unity.Addressables.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.InputSystem">
+      <HintPath>$(GameFolder)\Shape of Dreams_Data\Managed\Unity.InputSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
+      <HintPath>$(GameFolder)\Shape of Dreams_Data\Managed\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime">
+      <HintPath>$(GameFolder)\Shape of Dreams_Data\Managed\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+      <HintPath>$(GameFolder)\Shape of Dreams_Data\Managed\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+      <HintPath>$(GameFolder)\Shape of Dreams_Data\Managed\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Runtime">
+      <HintPath>$(GameFolder)\Shape of Dreams_Data\Managed\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Shaders">
+      <HintPath>$(GameFolder)\Shape of Dreams_Data\Managed\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(GameFolder)\Shape of Dreams_Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(GameFolder)\Shape of Dreams_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>$(GameFolder)\Shape of Dreams_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule">
+      <HintPath>$(GameFolder)\Shape of Dreams_Data\Managed\UnityEngine.ParticleSystemModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>$(GameFolder)\Shape of Dreams_Data\Managed\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>$(GameFolder)\Shape of Dreams_Data\Managed\UnityEngine.UIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainModule">
+        <HintPath>$(GameFolder)\Shape of Dreams_Data\Managed\UnityEngine.TerrainModule.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+	
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy /Y &quot;$(TargetPath)&quot; &quot;$(BepInExFolder)\scripts&quot;&#xD;&#xA;copy /Y &quot;$(TargetPath)&quot; &quot;$(ProjectDir)&quot;" />
+  </Target>
+	
+
+</Project>
